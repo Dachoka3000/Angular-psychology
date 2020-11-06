@@ -5,28 +5,48 @@ import { Post } from './post';
 import { Comment } from './comment';
 
 
+const url = 'http://psychology9000.herokuapp.com/api/post/';
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class PostServiceService {
 
-  url = 'http://psychology9000.herokuapp.com/api';
+  myPosts:any;
+
   constructor(private http: HttpClient) { }
 
-  getPosts(): Observable<any[]> {
-    return this.http.get<any[]>(this.url + '/post/'+"8c3f8c4f2448fd1822d97a0efdf9be9f601365d4");
+  getPosts(): Observable<any> {
+    return this.http.get('/api/post/');
+  }
+
+  getUserPosts(){
+    interface ApiResponse{
+      items:any;
+    }
+    let promise = new Promise((resolve,reject)=>{
+      this.http.get<ApiResponse>('/api/post/8c3f8c4f2448fd1822d97a0efdf9be9f601365d4/').toPromise().then(response=>{
+        this.myPosts=response;
+        resolve();
+
+      },error=> {
+        reject()
+      })
+    })
+    return promise
   }
 
   addPost(val:any){
-    return this.http.post(this.url + '/post/', val);
+    return this.http.post(url + '/post/', val);
   }
 
   updatePost(val:any){
-    return this.http.put(this.url + '/post/', val);
+    return this.http.put(url + '/post/', val);
   }
 
   deletePost(val:any){
-    return this.http.delete(this.url + '/post/'+val)
+    return this.http.delete(url + '/post/'+val)
   }
 
 }

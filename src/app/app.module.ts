@@ -9,6 +9,7 @@ import { PostComponent } from './post/post.component';
 import { PostFormComponent } from './post-form/post-form.component';
 import { CommentFormComponent } from './comment-form/comment-form.component';
 import { CommentComponent } from './comment/comment.component';
+import { PostServiceService } from './post-service.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { CommentComponent } from './comment/comment.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [PostServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

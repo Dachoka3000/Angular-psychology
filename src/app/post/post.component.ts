@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PostServiceService } from '../post-service.service'
-import { AlertService } from '../alert.service';
 import { Post } from '../post';
 import { Comment } from '../comment';
 
@@ -14,19 +13,27 @@ import { Comment } from '../comment';
 export class PostComponent implements OnInit {
 
 
-  constructor(private postService:PostServiceService) { 
+  constructor(public postService:PostServiceService) { 
     
   }
-  PostList:any=[];
+  PostList:Post[];
 
+  // refreshPostList(){
+  //   this.postService.getUserPosts().then((success)=>{
+  //     this.PostList=this.postService.myPosts;
+  //   },(error)=>{
+  //     console.log(error)
+  //   })
+    
+  // }
 
-  ngOnInit() {
-    this.refreshPostList();
-  }
-  refreshPostList(){
-    this.postService.getPosts().subscribe(data=>{
-      this.PostList=data;
-    })
-  }
+  ngOnInit(){
+    this.postService.getPosts().subscribe(
+    data=>{
+    this.PostList=data;
+    }
+    );
+  } 
+  
 
 }
