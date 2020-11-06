@@ -1,0 +1,22 @@
+<div class="container-fluid">
+
+    <h1>Hi Buddy!</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <ul  *ngFor="let x of PostList">
+                <li>
+                    <div class="card-header">
+                        <h3>My Thoughts</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4>{{x.user_post}}</h4>
+                    </div>
+                </li>
+              
+            </ul>
+            <!-- <app-post-form></app-post-form> -->
+        </div>
+    </div>
+  
+   
+</div>
